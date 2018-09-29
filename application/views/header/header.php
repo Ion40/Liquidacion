@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/chosen.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/sweetalert2.min.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/jquery.dataTables.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/js/fuente.css">
 </head>
 <body>

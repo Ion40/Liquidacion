@@ -14,6 +14,7 @@
 
 <script src="<?PHP echo base_url();?>assets/js/bootstrap.js"></script>
 <script src="<?PHP echo base_url();?>assets/js/chosen.jquery.js"></script>
+<script src='<?php echo base_url()?>assets/js/moment.js'></script>
 <script type="text/javascript">
 	$('.datepicker').datepicker({
         format: 'yyyy-mm-dd',
