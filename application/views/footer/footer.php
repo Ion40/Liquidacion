@@ -81,6 +81,11 @@
     for (var selector in config) {
         $(selector).chosen(config[selector]);
     }
+
+    $(document).ready(function(){
+       $('.sidenav').sidenav();
+    });
+      
 </script>
 </body>
 </html>
