@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/jquery.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/jquery.dataTables.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/js/fuente.css">
+    <link href="<?php echo base_url()?>assets/css/buttons.dataTables.min.css" rel="stylesheet"/>
 </head>
 <body>
 	<nav>
@@ -23,16 +24,15 @@
          </span>
       </a>
       <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-      <!--<ul id="nav-mobile" class="hide-on-med-and-down">
-        <li><a href="sass.html">Sass</a></li>
-      </ul> -->
+      <ul id="nav-mobile" class="hide-on-med-and-down right" style="margin-right:5em;">
+        <li><a href="<?php echo base_url()?>">Liquidación por unidades</a></li>
+        <li><a href="<?php echo base_url('index.php/Facturas')?>">Facturas</a></li>
+      </ul>
     </div>
   </nav>
 
   <ul class="sidenav" id="mobile-demo">
-    <li><a href="sass.html">Sass</a></li>
-    <li><a href="badges.html">Components</a></li>
-    <li><a href="collapsible.html">Javascript</a></li>
-    <li><a href="mobile.html">Mobile</a></li>
+      <li><a href="<?php echo base_url()?>">Liquidación por unidades</a></li>
+      <li><a href="<?php echo base_url('index.php/Facturas')?>">Facturas</a></li>
   </ul>
   <br><br>

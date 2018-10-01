@@ -55,12 +55,33 @@ class Liquidacion_model extends CI_Model
             $json["data"][$i]["TOTAL"] = $key["TOTAL"];
             $json["data"][$i]["PESOGRAMOS"] = $key["PESOGRAMOS"];
             $json["data"][$i]["LIBRASVENDIDAS"] = $key["LIBRASVENDIDAS"];
-            $json["data"][$i]["TOTALNETO"] = $key["TOTALNETO"];
+            $json["data"][$i]["TOTALNETO"] = number_format($key["TOTALNETO"],2);
+            $json["data"][$i]["Stock"] = "<p id='Stock".$key["CODARTICULO"]."'></p>";
+            $json["data"][$i]["DEVOL"] = "<p id='devol".$key["CODARTICULO"]."'></p>";
             $i++;
         }
         echo json_encode($json);
         $this->sqlsrv->close();
 
+    }
+
+    public function getStock($codal,$codArt)
+    {
+        $i = 0;
+        $json = array();
+        $query = $this->sqlsrv->fetchArray(
+            "SELECT CODARTICULO,CODALMACEN, SUM(STOCK) AS STOCK FROM STOCKS
+             WHERE CODALMACEN = '".$codal."' AND CODARTICULO = ".$codArt."
+             GROUP BY CODARTICULO,CODALMACEN
+            ", SQLSRV_FETCH_ASSOC); 
+             foreach ($query as $key ) {
+                $json[$i]["CODARTICULO"] = $key["CODARTICULO"];
+                $json[$i]["CODALMACEN"] = $key["CODALMACEN"];
+                $json[$i]["STOCK"] = $key["STOCK"];
+                $i++;
+            }
+            echo json_encode($json);
+            $this->sqlsrv->close();
     }
 }
 

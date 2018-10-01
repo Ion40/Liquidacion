@@ -36,34 +36,40 @@
 		</div>
 	</div>
 </div>
-  <div class="row" style='margin-top:-15vh;'>
-  <h6 class='col s6 m6 l6 center'>
+  <h6 class='center'>
     <strong>Productos Facturados: <span id='spanCount'>0</span></strong>
   </h6>
-  <h6 class='col s6 m6 l6 left'>
-    <strong>Total Neto: <span id='spanNeto'>0</span></strong>
-  </h6>
-  </div>
+  <br>
 <div class="row" style='margin-top:-80px;'>
 	<div class="container-fluid">
 		<div class="col s12 m12 l12">
-			<table id='tblDatos' class='table highlight striped compact'>
+			<table id='tblFacturas' class='table highlight striped compact'>
 				<thead>
 					<tr>
 						<th>Fecha</th>
-						<th>Articulo</th>
-						<th>Descripcion Articulo</th>
-						<th>Stock</th>
-						<th>Ventas</th>
-						<th>Precio</th>
-						<th>Total</th>
-						<th>Libras Vendidas</th>
+						<th>Hora</th>
+						<th>Serie</th>
+						<th>Número</th>
+						<th>Ruta</th>
+						<th>Cod. Cliente</th>
+						<th>Cliente</th>
+						<th>Vendedor</th>
+						<th>TotalBruto</th>
+						<th>Descuento</th>
+						<th>ISC</th>
+						<th>IVA</th>
+						<th>TotalNeto</th>
 					</tr>
 				</thead>
 				<tbody>
 				</tbody>
 				<tfoot>
 				     <tr>
+					 <th></th>
+						<th></th>
+						<th></th>
+						<th></th>
+						<th></th>
 						<th></th>
 						<th></th>
 						<th></th>

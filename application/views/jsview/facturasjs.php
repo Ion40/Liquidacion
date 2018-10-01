@@ -1,6 +1,6 @@
-<script>
+<script>    
 $(document).ready(function(){
-    $("#tblDatos").DataTable({
+    $("#tblFacturas").DataTable({
         "paging": false,
         "info": false,
         dom: 'Bfrtip',
@@ -9,7 +9,7 @@ $(document).ready(function(){
                 'excel',
                 'csv',
                 'pdf',
-                'print' 
+                'print'  
             ],
         "language": {
             "info": "Registro _START_ a _END_ de _TOTAL_ entradas",
@@ -29,10 +29,9 @@ $(document).ready(function(){
     });
 });
 
-
 $("#btnCalcular").click(function(){
     var ruta = $("#Rutas option:selected").val(), f1 = $("#fecha1").val(), f2 = $("#fecha2").val();
-    $("#tblDatos").DataTable({
+    $("#tblFacturas").DataTable({
         responsive: true,
         "autoWidth":false,
         dom: 'Bfrtip',
@@ -46,17 +45,22 @@ $("#btnCalcular").click(function(){
         "scrollY":        "300px",
         "scrollCollapse": true,
         "paging":         false,
-        "ajax": "index.php/IncomigData/"+ ruta +"/"+ f1 + "/"+ f2,
+        "ajax": "GetFacturas/"+ ruta +"/"+ f1 + "/"+ f2,
         "destroy": true,
         "columns":[
             { "data": "FECHA" },
-            { "data": "CODARTICULO" },
-            { "data": "DESCRIPCION" },
-            { "data": "Stock"},
-            { "data": "UNID1" },
-            { "data": "PRECIO" },
-            { "data": "TOTAL" },
-            { "data": "LIBRASVENDIDAS" }
+            { "data": "HORA" },
+            { "data": "NUMSERIE" },
+            { "data": "NUMFACTURA"},
+            { "data": "RUTA"},
+            { "data": "CODCLIENTE" },
+            { "data": "NOMBRECLIENTE" },
+            { "data": "CODVENDEDOR" },
+            { "data": "TOTALBRUTO" },
+            { "data": "DTOCOMERCIAL"},
+            { "data": "TOTALCARGOSDTOS"},
+            { "data": "TOTALIMPUESTOS"},
+            { "data": "TOTALNETO"}
         ],
         columnDefs: [{
             targets: 0,
@@ -65,8 +69,14 @@ $("#btnCalcular").click(function(){
             }
           },
           {
-            targets: [5,6],
-            render: $.fn.dataTable.render.number( ',', '.', 2, /*'$'*/ )
+            targets: 1,
+            render: function (d){
+                return moment(d.date).format("HH:mm");
+            }
+          },
+         {
+            targets: [8,10,11,12],
+            render: $.fn.dataTable.render.number( ',', '.', 2, /*'$'*/)
           }
         ],
         "paging":false,
@@ -94,83 +104,17 @@ $("#btnCalcular").click(function(){
             }
         },
         "initComplete": function( settings, json ) {
-            var table = $('#tblDatos').DataTable();
+            var table = $('#tblFacturas').DataTable();
             $("#spanCount").html(table.rows().count());
-            recorrer(ruta,f1,f2);
-            GetStocks(ruta);
         },
         "footerCallback": function ( row, data, start, end, display ) {
-            var numFormat = $.fn.dataTable.render.number( ',', '.', 2, /*'C$'*/).display;
-            /*total = this.api().column(6).data().reduce(function (a, b) {
-                    return parseFloat(a) + parseFloat(b);
-                }, 0 );
-            $(this.api().column(6).footer()).html(numFormat(total));*/
-            
-            lib = this.api().column(7).data().reduce(function (a, b) {
-                    return parseFloat(a) + parseFloat(b);
-                }, 0 );
-            $(this.api().column(7).footer()).html(numFormat(lib));
+         var numFormat = $.fn.dataTable.render.number( ',', '.', 2, 'C$').display;   
+         total = this.api().column(12).data().reduce(function (a, b) {
+                return parseFloat(a) + parseFloat(b);
+            }, 0 );
+          $(this.api().column(12).footer()).html(numFormat(total));
     }
     });
-});  
-
-
-function recorrer(ruta,f1,f2)
-    {
-        $.ajax({
-            url: "index.php/IncomigData/"+ ruta +"/"+ f1 + "/"+ f2,
-            type: "GET",
-            dataType: "json",
-            contentType: false,
-            processData: false,
-            success: function(datos)
-            {
-                if (true)
-                {
-                    $.each( datos, function( key, value ) {
-                        $("#spanNeto").html(value[0].TOTALNETO);
-                    });
-                }
-            }
-        });
-    }
-
-function GetStocks(ruta)
-{
-    var i = 0;
-    var it= 0;
-    var i2= 0;
-    var unidades = new Array();
-    var array = new Array();
-    var t = $("#tblDatos").DataTable();
-    t.rows().eq(0).each(function (index) {
-    	var row = t.row(index);
-    	var data = row.data();
-    	array[i] = data.CODARTICULO;
-        unidades[i] = data.UNID1;
-        i++;
-    });
-    $.each(array, function (key , value) {
-        $.ajax({
-            url: "index.php/GetStock/"+ ruta + "/" + value,
-            type: "GET",
-            dataType: "json",
-            contentType: false,
-            processData: false,
-            success: function(datos)
-            {
-                if (true)
-                {
-                    $.each( datos, function( key, value ) {
-                            $("#Stock"+value.CODARTICULO).text(value.STOCK);
-                            $("#devol"+value.CODARTICULO).text(value.STOCK - unidades[i2]);
-                            i2++;
-                        });
-                }
-            }
-        });
-        it++;
-    }); 
-}
+});
 
 </script>

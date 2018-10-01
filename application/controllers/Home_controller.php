@@ -21,4 +21,9 @@ class Home_controller extends CI_Controller {
 	{
 		$this->Liquidacion_model->getData($ruta,$f1,$f2);
 	}
+
+	public function getStock($codal,$codArt)
+	{
+		$this->Liquidacion_model->getStock($codal,$codArt);
+	}
 }
