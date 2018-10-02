@@ -83,6 +83,38 @@ class Liquidacion_model extends CI_Model
             echo json_encode($json);
             $this->sqlsrv->close();
     }
+
+    public function getCredito($ruta,$fecha1,$fecha2)
+    {
+        $i = 0;
+        $json = array();
+        $query = $this->sqlsrv->fetchArray(
+            "SELECT sum(FV.TOTALBRUTO) AS SUMTOTALBRUTO,
+            count(T.ESTADO) AS NUMCLIENTES,
+            CASE WHEN T.ESTADO = 'P' THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END AS CREDITO
+            FROM	dbo.FACTURASVENTA FV
+            INNER JOIN dbo.FACTURASVENTACAMPOSLIBRES CL ON CL.NUMSERIE = FV.NUMSERIE AND CL.NUMFACTURA = FV.NUMFACTURA AND CL.N = FV.N
+            INNER JOIN dbo.CLIENTES C ON C.CODCLIENTE = FV.CODCLIENTE
+            INNER JOIN dbo.VENDEDORES V ON V.CODVENDEDOR = FV.CODVENDEDOR
+            INNER JOIN dbo.ALBVENTACAB AC ON FV.NUMSERIE = AC.NUMSERIEFAC AND FV.NUMFACTURA = AC.NUMFAC AND FV.N = AC.NFAC
+            INNER JOIN dbo.ALBVENTALIN AL ON AL.NUMSERIE = AC.NUMSERIE AND AL.NUMALBARAN = AC.NUMALBARAN AND AL.N = AC.N AND AL.NUMLIN = 1
+            INNER JOIN dbo.ALMACEN A ON AL.CODALMACEN = A.CODALMACEN
+            INNER JOIN dbo.RUTAS R ON A.NOMBREALMACEN = R.DESCRIPCION
+            INNER JOIN dbo.TESORERIA T ON FV.NUMSERIE = T.SERIE AND FV.NUMFACTURA = T.NUMERO AND FV.N = T.N 
+            AND T.POSICION = 1 AND T.ORIGEN = 'C' AND T.TIPODOCUMENTO = 'F'
+            WHERE   CL.FECEXPORT IS NULL AND FV.N = 'B' AND FV.FECHA BETWEEN '".$fecha1."' and '".$fecha2."' AND A.CODALMACEN = '".$ruta."' 
+            and T.ESTADO = 'P'
+            GROUP BY T.ESTADO
+            ", SQLSRV_FETCH_ASSOC); 
+                foreach ($query as $key) {
+                    $json[$i]["SUMTOTALBRUTO"] = $key["SUMTOTALBRUTO"];
+                    $json[$i]["NUMCLIENTES"] = $key["NUMCLIENTES"];
+                    $i++;
+                }
+            
+            echo json_encode($json);
+            $this->sqlsrv->close();
+    }
 }
 
 ?>

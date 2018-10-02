@@ -37,11 +37,17 @@
 	</div>
 </div>
   <div class="row" style='margin-top:-15vh;'>
-  <h6 class='col s6 m6 l6 center'>
+  <h6 class='col s3 m3 l3 center'>
     <strong>Productos Facturados: <span id='spanCount'>0</span></strong>
   </h6>
-  <h6 class='col s6 m6 l6 left'>
+  <h6 class='col s3 m3 l3 left'>
     <strong>Total Neto: <span id='spanNeto'>0</span></strong>
+  </h6>
+  <h6 class='col s3 m3 l3 left'>
+    <strong>Clientes Credito: <span id='spanCredito'>0</span></strong>
+  </h6>
+  <h6 class='col s3 m3 l3 left'>
+    <strong>Total Credito: <span id='spanTotalCred'>0</span></strong>
   </h6>
   </div>
 <div class="row" style='margin-top:-80px;'>

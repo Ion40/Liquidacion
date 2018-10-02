@@ -31,7 +31,14 @@ $(document).ready(function(){
 
 $("#btnCalcular").click(function(){
     var ruta = $("#Rutas option:selected").val(), f1 = $("#fecha1").val(), f2 = $("#fecha2").val();
-    $("#tblFacturas").DataTable({
+    if (ruta == "") {
+        var toastHTML = '<span>Seleccione una ruta!</span>';
+        M.toast({html: toastHTML});
+	} else if(f1 == "" || f2 == "") {
+        var toastHTML = '<span>Debe ingresar ambas fechas para efectuar el calculo</span>';
+        M.toast({html: toastHTML});
+    }else{
+        $("#tblFacturas").DataTable({
         responsive: true,
         "autoWidth":false,
         dom: 'Bfrtip',
@@ -115,6 +122,7 @@ $("#btnCalcular").click(function(){
           $(this.api().column(12).footer()).html(numFormat(total));
     }
     });
+    }
 });
 
 </script>

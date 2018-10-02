@@ -6,6 +6,7 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route["IncomigData/(:any)/(:any)/(:any)"] = "Home_controller/getDataLiq/$1/$2/$3";
 $route["GetStock/(:any)/(:any)"] = "Home_controller/getStock/$1/$2";
+$route["GetCredito/(:any)/(:any)/(:any)"] = "Home_controller/getCredito/$1/$2/$3";
 
 $route["Facturas"] = "DetalleFactura_controller";
 $route["GetFacturas/(:any)/(:any)/(:any)"] = "DetalleFactura_controller/getFacturas/$1/$2/$3";
