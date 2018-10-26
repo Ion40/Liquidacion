@@ -6,7 +6,8 @@ class DetalleFactura_controller extends CI_Controller {
 	{
 		parent::__construct();
         $this->load->model("DetalleFactura_model");
-        $this->load->model("Liquidacion_model");
+		$this->load->model("Liquidacion_model");
+		$this->load->database();
 	}
 
 	public function index()

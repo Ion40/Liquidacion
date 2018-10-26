@@ -35,7 +35,7 @@ class Liquidacion_model extends CI_Model
                 from AA_AGRUPACION_VENTA AS av
                 LEFT OUTER JOIN ARTICULOSCAMPOSLIBRES AS al ON av.CODARTICULO = al.CODARTICULO
                 inner join STOCKS s on av.CODARTICULO = s.CODARTICULO
-                where av.CODALMACEN = '".$ruta."' and (av.FECHA BETWEEN '".$fecha1."' and '".$fecha2."') and s.STOCK > '0' 
+                where av.CODALMACEN = '".$ruta."' and (av.FECHA BETWEEN '".$fecha1."' and '".$fecha2."') --and s.STOCK > '0' 
                 and s.CODALMACEN = av.CODALMACEN
                 GROUP BY av.FECHA, av.CODARTICULO, av.REFERENCIA, av.DESCRIPCION, av.PRECIO, av.DTO, av.IVA,
                 av.CARGO1, av.CODVENDEDOR, av.CODALMACEN,al.PESOGRAMOS, s.STOCK,av.FECHA

@@ -10,3 +10,7 @@ $route["GetCredito/(:any)/(:any)/(:any)"] = "Home_controller/getCredito/$1/$2/$3
 
 $route["Facturas"] = "DetalleFactura_controller";
 $route["GetFacturas/(:any)/(:any)/(:any)"] = "DetalleFactura_controller/getFacturas/$1/$2/$3";
+
+$route["Integraciones"] = "Integraciones_Controller";  
+$route["ShowIntegraciones"] = "Integraciones_Controller/integraciones";  
+$route["GetFacturasDet/(:any)"] = "Integraciones_Controller/getFacturasDet/$1";  

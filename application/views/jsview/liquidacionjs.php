@@ -36,10 +36,10 @@ $("#btnCalcular").click(function () {
 		f2 = $("#fecha2").val();
 	if (ruta == "") {
         var toastHTML = '<span>Seleccione una ruta!</span>';
-        M.toast({html: toastHTML});
+        M.toast({html: toastHTML, classes:'orange-text rounded'});
 	} else if(f1 == "" || f2 == "") {
         var toastHTML = '<span>Debe ingresar ambas fechas para efectuar el calculo</span>';
-        M.toast({html: toastHTML});
+        M.toast({html: toastHTML, classes:'red-text rounded'});
     }else{
 		$("#tblDatos").DataTable({
 			responsive: true,
